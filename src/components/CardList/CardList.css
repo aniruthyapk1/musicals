@@ -1,0 +1,168 @@
+*{
+    margin: 0 auto;
+}
+main{
+    display: grid;
+    grid-template-columns: 1fr repeat(12,minmax(auto, 60px)) 1fr;
+    grid-gap: 40px;
+    padding: 60px 0;
+}
+.cards{
+    grid-column: 2/span 12;
+    display: grid;       
+    grid-template-columns: repeat(12,minmax(auto, 60px));
+    grid-gap:40px;
+
+}
+.card{
+    grid-column-end: span 4;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+}
+.card:hover{
+    transform: translate(-3px);
+}
+  
+.image-container{
+    width: 100%;
+    padding-top: 56.25%;
+    overflow: hidden;
+    position: relative;
+}
+.image-container img{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.text-block {
+    position: absolute;
+    bottom: 0;
+    font-size: 1.5rem;
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    padding-bottom: 5px;
+    width:100%;
+  }
+
+button{
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+.button-controls{
+    padding: 10px;
+    display: flex;
+    align-content: center;
+    width: 70%;
+    
+
+}
+
+.button-control{
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+
+    
+}
+.qtyDsp{
+    height: auto;
+    margin: 10px;
+    padding: 4px;
+    font-size: 20px;
+    width: fit-content;
+    position: absolute;
+    top:0;
+    right:0;
+    color: #fff;
+}
+.button-control{
+    width: 70%;
+    padding: 10px;
+
+}
+.button-controls{
+    margin-left: 20px; 
+}
+
+  .text-block .button-controls{
+    position: absolute;
+    bottom: 0;
+    right:0;
+    width:30%;
+    float: right;
+ } 
+ .text-block .prodInfo{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 5px;
+     text-align: left;
+     width: 60%;
+     float: left;
+     margin-bottom: 5px;
+ } 
+ /* .text-block {
+     display: flex;
+     justify-content: space-between;
+ } */
+  /* .image-container img {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    left: 0;
+  } */
+  
+/* .text-block .button-controls{
+    width: 30%;
+    height: 75%;
+
+}
+.text-block .prodInfo{
+    overflow: hidden;
+    width: 70%;
+    text-align: left;
+    padding: 10px;
+} */
+  @media only screen and (max-width: 1000px){
+    .card{
+            grid-column-end: span 6;
+    }
+
+}
+@media only screen and (max-width: 700px){
+    main{
+        grid-gap: 20px;
+    }
+    .card{
+        grid-column-end: span 12;
+    }
+    .text-block{
+        font-size: 1rem;
+    }
+    .qtyDsp{
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 500px){
+    main{
+        grid-template-columns: 10px repeat(6, 1fr) 10px;
+        grid-gap: 10px;
+    }
+    .cards{
+        grid-column: 2/span 6;
+        grid-template-columns: repeat(6, 1fr);
+        grid-gap: 20px;
+    }
+    .card{
+        grid-column-end: span 12;
+    }
+    .text-block{
+        font-size: 1rem;
+    }
+}
+

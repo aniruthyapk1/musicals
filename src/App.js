@@ -84,7 +84,6 @@ class App extends React.Component {
   onQuantityOrder = (prodName, qty, price, index) => {
     const filterProdName = this.state.qtyOrdered.findIndex(e => e.item === prodName);
     const newState = { ...this.state };
-
     if (filterProdName !== -1) {
       if (newState.qtyOrdered[filterProdName].qty >= 0 && qty > 0) {
         newState.qtyOrdered[filterProdName].qty += qty;
@@ -165,7 +164,7 @@ class App extends React.Component {
   }
   //when the qty is Zero, we are sending that to the Cart
   excludeTheZeroQtyItem = (val, key)=>{
-    return val.filter(e => e[key] > 0)
+    return val.filter(e => e[key] > 0);
   }
   render() {
     const { route, instrDetails, qtyOrdered, visible } = this.state;
@@ -177,7 +176,10 @@ class App extends React.Component {
 
           <header className="title">Musical</header>
           <hr className="new1"></hr>
-          <Navigation onRouteChange={this.onRouteChange} />
+          <Navigation onRouteChange={this.onRouteChange} shoppingColorChange={this.excludeTheZeroQtyItem(qtyOrdered,'qty')} totQty={this.addTot(qtyOrdered,'qty')}/>:
+
+          
+          
 
           <div className="main-content">
             {route === 'home' ?

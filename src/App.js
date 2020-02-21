@@ -80,6 +80,20 @@ class App extends React.Component {
       visible: visible })
     }
   }
+  notificationMessage = (message, type)=>{
+ return  store.addNotification({
+    message: `${message}`,
+    type: `${type}`,
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animated", "fadeIn"],
+    animationOut: ["animated", "fadeOut"],
+    dismiss: {
+      duration: 1,
+      onScreen: false
+    }
+  })
+}
   //The Core Logic has been written here to handle all the order related Info(like Ordered Quantity, Price for Each Article)
   onQuantityOrder = (prodName, qty, price, index) => {
     const filterProdName = this.state.qtyOrdered.findIndex(e => e.item === prodName);
@@ -88,53 +102,18 @@ class App extends React.Component {
       if (newState.qtyOrdered[filterProdName].qty >= 0 && qty > 0) {
         newState.qtyOrdered[filterProdName].qty += qty;
         newState.qtyOrdered[filterProdName].totPrice = newState.qtyOrdered[filterProdName].qty * price;
-        store.addNotification({
-          message: `Added`,
-          type: "success",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animated", "fadeIn"],
-          animationOut: ["animated", "fadeOut"],
-          dismiss: {
-            duration: 1,
-            onScreen: false
-          }
-        })
+        this.notificationMessage('Added','success')
 
       } else if (newState.qtyOrdered[filterProdName].qty > 0) {
         newState.qtyOrdered[filterProdName].qty += qty;
         newState.qtyOrdered[filterProdName].totPrice -= price;
-        store.addNotification({
-          message: `Removed`,
-          type: "warning",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animated", "fadeIn"],
-          animationOut: ["animated", "fadeOut"],
-          dismiss: {
-            duration: 1,
-            onScreen: false
-          }
-        })
-
+       this.notificationMessage('Removed','warning')
       }
     }
     else {
       if (qty > 0) {
         newState.qtyOrdered.push({ item: prodName, qty: qty, totPrice: price, index: index })
-        store.addNotification({
-          message: `First Order on this item`,
-          type: "success",
-          insert: "top",
-          container: "top-right",
-          animationIn: ["animated", "fadeIn"],
-          animationOut: ["animated", "fadeOut"],
-          dismiss: {
-            duration: 2000,
-            onScreen: false
-          }
-        })
-
+        this.notificationMessage('First Order on this item','success')
       }
     }
 
@@ -149,18 +128,7 @@ class App extends React.Component {
   //after proceeding with the Cart, the state will be refined to InitialState
   onProceed = () => {
     this.resetBuilder();
-    store.addNotification({
-      message: "Thank you!",
-      type: "success",
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"],
-      dismiss: {
-        duration: 2000,
-        onScreen: false
-      }
-    })
+    this.notificationMessage('Thank You!','success')
   }
   //when the qty is Zero, we are sending that to the Cart
   excludeTheZeroQtyItem = (val, key)=>{
